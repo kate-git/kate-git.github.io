@@ -170,7 +170,7 @@ a:hover {
     flex-direction: row;
     flex: 1 1 0%;
     -webkit-box-pack: start;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .content__social-item {
     display: flex;
