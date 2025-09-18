@@ -127,6 +127,7 @@ a:hover {
 }
 
 .content__hello-img {
+    object-fit: cover;
     width: 142px;
     height: 142px;
     min-width: 142px;
