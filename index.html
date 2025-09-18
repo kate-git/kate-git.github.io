@@ -1,152 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-      <title>Portfolio</title>
-       <link rel="stylesheet" type="text/css" href="/assets/styles/styles.css">
-    </head>  
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katsiaryna Barysevich - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors */
+            --primary-orange: #FF6B35;
+            --secondary-orange: #F7931E;
+            --dark-navy: #1A1A2E;
+            --deep-navy: #0F0F1A;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            
+            /* Accent Colors */
+            --accent-green: #00D4AA;
+            --accent-green-dark: #00B89C;
+            --accent-pink: #FF6B9D;
+            --text-dark: #2C2C54;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            --gradient-dark: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 100%);
+            --gradient-green: linear-gradient(135deg, #00D4AA 0%, #00B89C 100%);
+            
+            /* Glass Morphism */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(10px);
+        }
+
+        /* Smooth Scrolling Setup */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 100%);
+            color: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Section/Slide Styling */
+        .slide {
+            display: flex;
+            min-height: 100vh;
+            padding: 40px 20px;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Slide Numbers */
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-green);
+            transition: width 0.3s;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 212, 170, 0.3);
+        }
+        
+        /* Slide Separators */
+        .slide-separator {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+            opacity: 0.5;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            font-weight: 500;
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Glass Morphism Cards */
+        .overview-section, .session-card, .skill-card, .assessment-item, 
+        .timeline-content, .project-card, .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            border-left: 6px solid var(--accent-green);
+            margin: 20px 0;
+        }
+
+        /* Title Slide */
+        .title-slide {
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+
+        .course-info {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .session-info {
+            font-size: 1.4rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        /* Lists */
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
 <body>
-    <div class="main">
-        <div class="content">
-            <div class="content__hello">
-                <img class="content__hello-img" src="assets/img/avatar.png" alt="Avatar">
-                <div class="content__hello-text">
-                    <span class="content__name">
-                        <a href="/"> Hey, I'm Katsiaryna.</a>
-                    </span>
-                    <div><span class="content__description">This is my portfolio page</span></div>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Title Slide -->
+    <div class="slide title-slide" id="slide-1">
+        <div class="slide-number">1</div>
+        <div class="slide-content">
+            <div class="course-info">XR Creative Developer</div>
+            <h1>Katsiaryna Barysevich</h1>
+            <div class="subtitle">Portfolio</div>
+            <div class="session-info" style="margin-top: 2rem;">
+                <i class="fas fa-sharp fa-solid fa-circle-user"></i> <span class="content__description">Contact:</span>
                     <nav class="content__social">
-                        <a href="https://www.linkedin.com/in/katsiaryna-barysevich-385524101/" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/in.svg" alt="LinkedIn">
+                       <div> <a href="https://www.linkedin.com/in/katsiaryna-barysevich-385524101/" target="_blank" class="content__social-item">
+                            <i class="fa-brands fa-linkedin"></i>
                             <span>LinkedIn</span>
-                        </a>
-                        <a href="https://wa.me/46760973361" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/whatsapp.svg" alt="whatsapp">
+                        </a> </div>
+                        <div><a href="https://wa.me/46760973361" target="_blank" class="content__social-item">
+                            <i class="fa-brands fa-whatsapp"></i>
                             <span>Whatsapp</span>
-                        </a>
-                         <a href="https://github.com/kate-git" target="_blank" class="content__social-item">
-                            <img src="assets/img/icons/github.svg" alt="github">
+                        </a></div>
+                         <div><a href="https://github.com/kate-git" target="_blank" class="content__social-item">
+                         <i class="fa-brands fa-github"></i>
                             <span>GitHub</span>
                         </a>
+                        </div>
                         <a href="mailto:keo.90g@gmail.com">
+                        <i class="fa-brands fa-google"></i>
                             <span>Email</span>
                         </a>
                     </nav>
                 </div>
             </div>
-            <div class="container">
-                <header>
-                <h1 class="content__about-header">Katsiaryna Barysevich</h1>
-                <p class="subtitle">Portfolio</p>
-                <nav>
-                    <a href="#projects">Projects</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-                </header>
-            </div>
-
-            <section id="about">
-                <h2>About</h2>
-                <p>
-                   I'm a student on "XR Creative Developer" program. Have graduation as Telecommunication Engineer (Belarusian State University of Informatics and Radioelectronics). 
-                </p>
-            </section>
-             <section id="projects">
-                <h2>Projects</h2>
-                 <div class="project">
-                      <h3>Project title 1</h3>
-                <p>
-                   Description: 
-                   Instruments: 
-                   My role: 
-                </p>
-                     <p>
-                         <a href="https://youtube.com/my" target="_blank">Link to video of project</a>
-                     </p>
-                 </div>
-                
-                 <div class="project">
-                      <h3>Project 2</h3>
-                <p>
-                   Description: 
-                   Instruments: 
-                   My role: 
-                </p>
-                     <p>
-                         <a href="https://youtube.com/my" target="_blank">Link to video of project</a>
-                     </p>
-                 </div>
-                 
-            </section>
-<section id="skills"
-    <h2>Skills & Tools</h2>
-    <ul>
-        <li>Unity, Unreal, C#</li>
-        <li>Git, Blender, Maya, Substance Painter, Zbrush for iPad, Procreate</li>
-    </ul>
-</section>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
     
-                
-                <h2 class="content__subheader">Text</h2>
-                <div class="content__main-item">
-                    <div class="main-item__description">
-                        <p>I did a huge way to my current point. My way is about doing my best. I always try to find out real reasons and try to find the best solution. I'm thinking not only about code quality but also about business logic and customer satisfaction.</p>
-                    </div>
-                </div>
-                <div class="content__main-item">
-                    <div class="main-item__description">
-                        <p>I'm studying for a XR Creative Developer program at HI.</p>
-                    </div>
-                </div>
-                <h2 class="content__subheader">Projects</h2>
-                <div class="content__main-item project">
-                    <a data-fslightbox href="assets/img/project.png">
-                        <img src="assets/img/project.png" alt="project1">
-                    </a>
-                    <div>
-                        <div class="main-item__title">
-                            <a href="/example/project.html"><span>Project 1</span></a>
-                        </div>
-                        <div class="main-item__description">
-                            <p>This project is my diamond. I'm very proud of work that we with my classmates did there.
-                          </p>
-                        </div>
-                        <div class="main-item__subdescription">
-                            <p><span>Stack:</span> C#, Unity, Maya</p>
-                            <p class="main-item__links"><a href=""><span>Source Code</span></a><span>|</span><a href=""><span>Preview</span></a> </p>
-                        </div>
-                    </div>
-                </div>
-      
-             
-                    
-              
-                        <p class="main-item__date">Sep 13, 2022</p>
-                       
-        <div class="footer">
-            <div>
-                <span>© Katsiaryna B</span>
-            </div>
-            <div>
-                <nav class="footer__social">
-                    <a href="#link" target="_blank" class="footer__social-item">
-                        <img src="assets/img/icons/in.svg" alt="LinkedIn">
-                    </a>
-                    <a href="#link" target="_blank" class="footer__social-item">
-                        <img src="assets/img/icons/telegram.svg" alt="Telegram">
-                    </a>
-                </nav>
+    <!-- About me -->
+    <div class="slide" id="slide-2">
+        <div class="slide-number">2</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-clipboard-check"></i> About</h2>
+            <div class="content-card">
+                <p> I'm a student on "XR Creative Developer" program. Have graduation as Telecommunication Engineer (Belarusian State University of Informatics and Radioelectronics). 
+             </p>
             </div>
         </div>
-      </div>
+        <div class="slide-separator"></div>
     </div>
-  </div>       
-    <script src="assets/scripts/fslightbox.js"></script>
+
+    <!-- PWD Intro -->
+    <div class="slide title-slide" id="slide-3">
+        <div class="slide-number">3</div>
+        <div class="slide-content">
+            <h1>Skills</h1>
+            <p> I'm a student on "XR Creative Developer" program. Have graduation as Telecommunication Engineer (Belarusian State University of Informatics and Radioelectronics). 
+             </p>
+             <div class="content-card">
+                    <h4><i class="fab fa-unity"></i> Unity </h4>
+                </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Projects -->
+    <div class="slide" id="slide-4">
+        <div class="slide-number">4</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-trophy"></i> Projects</h2>
+            <div class="content-card">
+                <h4><i class="fas fa-box-open"></i> The "Escape The Grey" Puzzle Box</h4>
+                <p>It's a single-player experience. The objective is to design and implement a sequence of actions that the player must perform to solve the puzzle, demonstrating a practical application of logic, state management, and interaction design.</p>
+                <p>Description: Instruments: My role:
+Link to video of project
+Skills & Tools
+Unity, Unreal, C#
+Git, Blender, Maya, Substance Painter, Zbrush for iPad, Procreate</p>
+            </div>
+            <div class="content-card">
+                <h4><i class="fas fa-box-open"></i> The "Happy Flappy Bird" game</h4>
+                <p>It's a single-player experience. The objective is to design and implement a sequence of actions that the player must perform to solve the puzzle, demonstrating a practical application of logic, state management, and interaction design.</p>
+            </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Requirements -->
+    <div class="slide" id="slide-5">
+        <div class="slide-number">5</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-tasks"></i> Education</h2>
+            <div class="content-two-col">
+                 <div class="content-card">
+                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Belarusian State University of Informatics and Radioelectronics</h4>
+                    <p>Telecommunication Engineer (2008-2013)</p>
+                    <p>Minsk, Belarus</p>
+                </div>
+                 <div class="content-card">
+                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Hyper Island, Stockholm, Sweden</h4>
+                    <p>XR Creative Developer(2024-2026)</p>
+                </div>
+                 
+            </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Delivery -->
+    <div class="slide" id="slide-5">
+        <div class="slide-number">5</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-video"></i> Courses</h2>
+            <div class="content-card">
+                    <p>- Basics of software testing (2014),  Itransition Group Ltd.</p>
+                    <p>- SQL from scratch (2015),  Itransition Group Ltd.</p>
+                    <p>- Mobile testing basics, iOS testing tools, Android testing tools workshop (2015),  Itransition Group Ltd.</p>
+                    <p>- Web-services testing (2016),  Itransition Group Ltd.</p>
+                    <p>- Linux Essentials course (2016),  Itransition Group Ltd.</p>
+                    <p>- Performance optimization training (2018, EPAM Systems)</p>
+                </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+        }
+        
+        function handleScroll() {
+            const slides = document.querySelectorAll('.slide');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                    const slideNumber = index + 1;
+                    if (slideNumber !== currentSlide) {
+                        currentSlide = slideNumber;
+                        updateProgressBar();
+                    }
+                }
+            });
+        }
+        
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(handleScroll, 50);
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressBar();
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { 
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.content-card').forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        
+            setTimeout(handleScroll, 100);
+        });
+    </script>
 </body>
-
-  
-
-  
-
-  </html>
