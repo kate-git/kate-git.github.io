@@ -71,11 +71,28 @@
             width: 100%;
         }
 
-         .slide-content-logo {
-            max-width: 300px;
-            margin: 0 auto;
-            width: 100%;
-        }
+        .slide-content-logo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.slide-content-logo h4 {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  padding: 1rem;
+  border-radius: 6px;
+  min-height: 100px;     
+}
+
+.logo__img {
+  max-width: 100%;
+  max-height: 60px;  
+  object-fit: contain;
+}
 
         /* Slide Numbers */
         .slide-number {
