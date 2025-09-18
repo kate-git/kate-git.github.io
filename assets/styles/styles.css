@@ -167,7 +167,7 @@ a:hover {
     padding-top: 5px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
+    flex-direction: column;
     flex: 1 1 0%;
     -webkit-box-pack: start;
     justify-content: space-around;
