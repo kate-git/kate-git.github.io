@@ -269,6 +269,23 @@
             font-weight: 500;
         }
 
+        .video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* соотношение 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 10px; /* скругленные углы под стиль карточек */
+  margin-top: 1rem;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
@@ -408,6 +425,25 @@ Git, Blender, Maya, Substance Painter, Zbrush for iPad, Procreate</p>
         <div class="slide-separator"></div>
     </div>
 
+  <h4><i class="fas fa-box-open"></i>Shanti</h4>
+                <p>Imagine being a bird finally breaking free from its cage. Your goal is to flap your wings and navigate through a series of challenging obstacles, earning points based on how many coins you collect. The farther you go, the higher your score, testing both your skill and determination in a thrilling flight to freedom while also getting your arm workout.
+<div class="video-container">
+    <iframe 
+      width="560" 
+      height="315" 
+      src="https://www.youtube.com/embed/KvGVDtZ93GQ" 
+      title="Shanti" 
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+                </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    
     <!-- PWD Requirements -->
     <div class="slide" id="slide-5">
         <div class="slide-number">5</div>
