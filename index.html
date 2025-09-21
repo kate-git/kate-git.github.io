@@ -199,23 +199,37 @@
             border-left: 6px solid var(--accent-green);
             margin: 20px 0;
         }
-        .video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  margin-top: 1rem;
-}
+        
+        .project-card {
+          display: grid;
+          grid-template-columns: 1fr 1fr; /* текст слева, видео справа */
+          gap: 20px;
+          align-items: center;
+        }
 
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+
+        @media (max-width: 768px) {
+          .project-card {
+            grid-template-columns: 1fr; 
+          }
+        }
+        
+        .video-container {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 */
+          height: 0;
+          overflow: hidden;
+          border-radius: 10px;
+        }
+        
+        .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
 
         /* Title Slide */
         .title-slide {
@@ -410,33 +424,45 @@
         <div class="slide-content">
             <h2><i class="fas fa-trophy"></i> Projects</h2>
             
-            <div class="content-card">
+            <div class="content-card project-card">
+                <div class="project-text">
                 <h4><i class="fas fa-box-open"></i> The "Escape The Grey" Puzzle Box</h4>
                 <p>It's a single-player experience. The objective is to design and implement a sequence of actions that the player must perform to solve the puzzle, demonstrating a practical application of logic, state management, and interaction design.</p>
-                <p>Description: Instruments: My role:
+                <p><strong>Description: Instruments: My role:
 Link to video of project
 Skills & Tools
 Unity, Unreal, C#
 Git, Blender, Maya, Substance Painter, Zbrush for iPad, Procreate</p>
-            </div>
+           </strong></div>
             
-            <div class="content-card">
+            <div class="content-card project-card">
                 <h4><i class="fas fa-box-open"></i> The "Happy and Flappy" game</h4>
                 <p>Imagine being a bird finally breaking free from its cage. Your goal is to flap your wings and navigate through a series of challenging obstacles, earning points based on how many coins you collect. The farther you go, the higher your score, testing both your skill and determination in a thrilling flight to freedom while also getting your arm workout.
+                       <div class="project-video">
+                            <div class="video-container">
+                              <iframe 
+                                src="https://www.youtube.com/embed/ВАШ_ID_РОЛИКА" 
+                                title="YouTube video player"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                       </div>
             </div>
 
-              <div class="content-card"> 
-             <h4><i class="fas fa-box-open"></i>Shanti</h4>
-                <p>Imagine being a bird finally breaking free from its cage. Your goal is to flap your wings and navigate through a series of challenging obstacles, earning points based on how many coins you collect. The farther you go, the higher your score, testing both your skill and determination in a thrilling flight to freedom while also getting your arm workout.
-<div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/KvGVDtZ93GQ" 
-      title="Shanti" 
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen>
-    </iframe>
-  </div>
+            <div class="content-card project-card"> 
+                 <h4><i class="fas fa-box-open"></i>Shanti</h4>
+                <p>Yoga resort relax space</p>
+                    <div class="project-video">
+                        <div class="video-container">
+                          <iframe 
+                            src="https://www.youtube.com/embed/KvGVDtZ93GQ" 
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                          </iframe>
+                        </div>
+                      </div>
             
         </div>
         <div class="slide-separator"></div>
