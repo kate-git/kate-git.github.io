@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
     <style>
         * {
@@ -207,7 +208,16 @@
           align-items: center;
         }
 
-
+        .project-gallery {
+          width: 100%;
+          max-width: 600px; /* можно подогнать под свой дизайн */
+          margin: auto;
+        }
+        
+        .project-gallery img {
+          width: 100%;
+          border-radius: 10px;
+        }
         @media (max-width: 768px) {
           .project-card {
             grid-template-columns: 1fr; 
@@ -567,6 +577,40 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
                           </iframe>
                         </div>
                     </div>
+
+
+
+ <div class="content-card project-card"> 
+                 <div class="project-text">
+                 <h4><i class="fa-solid fa-wand-sparkles"></i>Witch House</h4>
+                <p>3D modelling project</p>
+                  <br>
+                <p><strong class="fa-solid fa-broom"> Tools: </strong>
+                    <br>Maya
+           </p></div>
+                    <div class="project-gallery">
+  <div class="swiper">
+    <div class="swiper-wrapper">
+    
+      <div class="swiper-slide"><img src="1.jpg" alt="Witch house 1"></div>
+      <div class="swiper-slide"><img src="4.jpg" alt="Witch house 2"></div>
+      <div class="swiper-slide"><img src="10.jpg" alt="Witch house 3"></div>
+      <div class="swiper-slide"><img src="11.jpg" alt="Witch house 4"></div>
+      <div class="swiper-slide"><img src="20.jpg" alt="Witch house 5"></div>
+        <div class="swiper-slide"><img src="21.jpg" alt="Witch house 5"></div>
+          <div class="swiper-slide"><img src="22.jpg" alt="Witch house 5"></div>
+            <div class="swiper-slide"><img src="23grey.jpg" alt="Witch house 5"></div>
+            <div class="swiper-slide"><img src="26grey.jpg" alt="Witch house 5"></div>
+    </div>
+ 
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+
+                 
             </div>
             
         <div class="slide-separator"></div>
@@ -674,5 +718,19 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
         
             setTimeout(handleScroll, 100);
         });
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>
     </script>
 </body>
