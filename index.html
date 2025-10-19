@@ -210,17 +210,25 @@
 
         .project-gallery {
           width: 100%;
-          max-width: 600px; /* можно подогнать под свой дизайн */
-          margin: auto;
+          max-width: 700px; 
+          margin: 0 auto;
         }
         
         .project-gallery img {
           width: 100%;
-          border-radius: 10px;
+          height: auto;
+          object-fit: cover;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: white;
+          text-shadow: 0 0 6px rgba(0,0,0,0.7);
         @media (max-width: 768px) {
-          .project-card {
-            grid-template-columns: 1fr; 
+          .swiper-button-next,
+          .swiper-button-prev {
+            transform: scale(0.7);
           }
         }
         
@@ -607,11 +615,7 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
     <div class="swiper-button-prev"></div>
     <div class="swiper-pagination"></div>
   </div>
-
-
-
-                 
-            </div>
+ </div>
             
         <div class="slide-separator"></div>
     </div>
@@ -731,6 +735,8 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
+      slidesPerView: 1,
+    spaceBetween: 10,
   });
 </script>
 </body>
