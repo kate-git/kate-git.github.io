@@ -600,18 +600,55 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
                   <div class="swiper-slide"><img src="26grey.jpg" alt="Witch house 6"></div>
                 </div>
  
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination witch-pagination"></div>
+    <div class="swiper-button-next witch-next"></div>
+    <div class="swiper-button-prev witch-prev"></div>
     <div class="swiper-pagination"></div>
   </div>
  </div>
+ </div>            
+ 
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const witchSwiper = new Swiper('.witch-swiper', {
+    loop: true,
+    pagination: {
+      el: '.witch-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.witch-next',
+      prevEl: '.witch-prev',
+    },
+  });
+</script>
+
+<style>
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+  z-index: 20;
+  pointer-events: auto;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+}
+
+.swiper-pagination-bullet {
+  background: var(--accent-green);
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent-green-dark);
+  opacity: 1;
+}
+</style>
             
         <div class="slide-separator"></div>
     </div>
 
 
     
-    <!-- PWD Requirements -->
     <div class="slide" id="slide-5">
         <div class="slide-number">5</div>
         <div class="slide-content">
