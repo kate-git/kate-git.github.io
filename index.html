@@ -72,12 +72,19 @@
             width: 100%;
         }
 
-        .slide-content-logo {
+       .slide-content-logo {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 колонки */
+  grid-template-columns: repeat(3, 1fr); /* 3 колонки по умолчанию */
   gap: 1.5rem;
   max-width: 900px;
   margin: 0 auto;
+}
+
+/* Мобильная адаптация: 2 колонки */
+@media (max-width: 768px) {
+  .slide-content-logo {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .slide-content-logo h4 {
