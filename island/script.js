@@ -15,6 +15,6 @@ const onProgress = (event) => {
   }
 };
 
-document.querySelectorAll('model-viewer').forEach(viewer => {
+document.querySelectorAll('#island').forEach(viewer => {
   viewer.addEventListener('progress', onProgress);
 });
