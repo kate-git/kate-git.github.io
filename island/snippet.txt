@@ -1,4 +1,4 @@
-<model-viewer id="island" src="island11.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral" poster="poster.webp" shadow-intensity="0.5" exposure="1.09" shadow-softness="1" camera-orbit="100.2deg 55.79deg 0.2357m" field-of-view="25.18deg">
+<model-viewer id="island" src="./island/island11.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls tone-mapping="neutral" poster="./island/poster.webp" shadow-intensity="0.5" exposure="1.09" shadow-softness="1" camera-orbit="100.2deg 55.79deg 0.2357m" field-of-view="25.18deg">
     <button class="Hotspot" slot="hotspot-2" data-position="-0.016404709652748373m 0.036900305774705426m -0.02543384666511641m" data-normal="-0.37859636790764833m 0.8961839956083969m 0.23134181684794008m" data-visibility-attribute="visible">
         <div class="HotspotAnnotation">snack time</div>
     </button><button class="Hotspot" slot="hotspot-4" data-position="0.041937995210507506m 0.03199468410312002m -0.022941695516167843m" data-normal="0.4935995910182741m 0.7478683912322251m -0.443905748039284m" data-visibility-attribute="visible">
