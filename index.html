@@ -806,8 +806,9 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
                     <p>Minsk, Belarus</p>
                 </div>
                  <div class="content-card">
-                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Hyper Island, Stockholm, Sweden</h4>
+                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Hyper Island</h4>
                     <p>XR Creative Developer(2024-2026)</p>
+                     <p>Stockholm, Sweden</p>
                 </div>
                  
             </div>
@@ -916,53 +917,25 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
 
 
 // HOTSPOT И PROGRESS BAR ДЛЯ <model-viewer>
-const modelViewer = document.querySelector('#island'); 
-    
-if (modelViewer) {
+const onProgress = (event) => {
+  const progressBar = event.target.querySelector('.progress-bar');
+  const updatingBar = event.target.querySelector('.update-bar');
+  
+  if (!progressBar || !updatingBar) return; 
+  
+  updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
 
-    modelViewer.querySelectorAll('.Hotspot').forEach(hotspot => {
-        hotspot.addEventListener('click', (event) => {
-            
-            event.stopPropagation();
-            
-            const targetOrbit = hotspot.dataset.orbit; 
-            const targetFov = hotspot.dataset.fov;
+  if (event.detail.totalProgress === 1) {
+    progressBar.classList.add('hide');
+    event.target.removeEventListener('progress', onProgress);
+  } else {
+    progressBar.classList.remove('hide');
+  }
+};
 
-            if (targetOrbit) {
-                modelViewer.cameraOrbit = targetOrbit; 
-            }
-            if (targetFov) {
-                modelViewer.fieldOfView = targetFov;
-            }
-            
-            const annotation = hotspot.querySelector('.HotspotAnnotation');
-            if (annotation) {
-                annotation.classList.toggle('visible-annotation'); 
-            }
-        });
-    });
-
-
-    const onProgress = (event) => {
-        const progressBar = event.target.querySelector('.progress-bar');
-        const updatingBar = event.target.querySelector('.update-bar');
-        
-        if (!progressBar || !updatingBar) return; 
-        
-        updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
-
-        if (event.detail.totalProgress === 1) {
-            progressBar.classList.add('hide');
-            event.target.removeEventListener('progress', onProgress);
-        } else {
-            progressBar.classList.remove('hide');
-        }
-    };
-    
-   
-    modelViewer.addEventListener('progress', onProgress);
-}
-
+document.querySelectorAll('#island').forEach(viewer => {
+  viewer.addEventListener('progress', onProgress);
+});
 // =========================================================================
 </script>
    
