@@ -881,111 +881,152 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
         </div>
         <div class="slide-separator"></div>
     </div>
-    
-   
-     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-        <script>
-        let currentSlide = 1;
-        const totalSlides = 6;
 
-        function updateProgressBar() {
-            const progress = (currentSlide / totalSlides) * 100;
-            const progressBar = document.getElementById('progressBar');
-            if (progressBar) {
-                progressBar.style.width = progress + '%';
-            }
+	
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+
+
+<script>
+    // --- portfolio scrolling, animation, progress ---
+    let currentSlide = 1;
+    const totalSlides = 5; 
+
+    function updateProgressBar() {
+        const progress = (currentSlide / totalSlides) * 100;
+        const progressBar = document.getElementById('progressBar');
+        if (progressBar) {
+            progressBar.style.width = progress + '%';
         }
+    }
+    
+    function handleScroll() {
+        const slides = document.querySelectorAll('.slide');
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
         
-        function handleScroll() {
-            const slides = document.querySelectorAll('.slide');
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
+        slides.forEach((slide, index) => {
+            const slideTop = slide.offsetTop;
+            const slideBottom = slideTop + slide.offsetHeight;
             
-            slides.forEach((slide, index) => {
-                const slideTop = slide.offsetTop;
-                const slideBottom = slideTop + slide.offsetHeight;
-                
-                if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
-                    const slideNumber = index + 1;
-                    if (slideNumber !== currentSlide) {
-                        currentSlide = slideNumber;
-                        updateProgressBar();
-                    }
+            if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                const slideNumber = index + 1;
+                if (slideNumber !== currentSlide) {
+                    currentSlide = slideNumber;
+                    updateProgressBar();
+                }
+            }
+        });
+    }
+    
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(handleScroll, 50);
+    });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        updateProgressBar();
+        
+      
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }
-        
-        let scrollTimeout;
-        window.addEventListener('scroll', function() {
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-            scrollTimeout = setTimeout(handleScroll, 50);
+        }, { 
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.content-card').forEach((el) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    
+        setTimeout(handleScroll, 100);
+
+        // Swiper
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
         });
         
-        document.addEventListener('DOMContentLoaded', function() {
-            updateProgressBar();
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { 
-                threshold: 0.2,
-                rootMargin: '0px 0px -50px 0px'
-            });
+        // Swiper for withc's house
+        const witchSwiper = new Swiper('.witch-swiper', {
+            loop: true,
+            pagination: {
+                el: '.witch-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.witch-next',
+                prevEl: '.witch-prev',
+            },
+        });
+    });
 
-            document.querySelectorAll('.content-card').forEach((el) => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(el);
-            });
+    // --- logic for <model-viewer> Progress Bar---
+    const onProgress = (event) => {
         
-            setTimeout(handleScroll, 100);
-   
-            
+        const progressBar = event.target.querySelector('.model-progress-bar');
+        const updatingBar = event.target.querySelector('.model-update-bar');
+        
+        if (!progressBar || !updatingBar) return;
+        
+        updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
 
-  const swiper = new Swiper('.swiper', {
-    loop: true,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  });
-});
+        if (event.detail.totalProgress === 1) {
+            progressBar.style.display = 'none';
+            event.target.removeEventListener('progress', onProgress);
+        } else {
+            progressBar.style.display = 'block';
+        }
+    };
+    
+    document.querySelector('#island')?.addEventListener('progress', onProgress);
+</script>
 
 
+<script type="module">
+    
+    const viewer = document.querySelector("#island");
 
+    if (viewer) {
+        viewer.querySelectorAll('.Hotspot').forEach((hotspot) => {
+            hotspot.addEventListener('click', (event) => {
+                
+                event.stopPropagation(); 
+                
+                const orbit = hotspot.dataset.orbit;
+                const target = hotspot.dataset.target;
+                const fov = hotspot.dataset.fov;
 
-// HOTSPOT И PROGRESS BAR ДЛЯ <model-viewer>
-const onProgress = (event) => {
-  const progressBar = event.target.querySelector('.progress-bar');
-  const updatingBar = event.target.querySelector('.update-bar');
-  
-  if (!progressBar || !updatingBar) return; 
-  
-  updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
+                if (orbit) viewer.cameraOrbit = orbit;
+                if (target) viewer.cameraTarget = target;
+                if (fov) viewer.fieldOfView = fov;
 
-  if (event.detail.totalProgress === 1) {
-    progressBar.classList.add('hide');
-    event.target.removeEventListener('progress', onProgress);
-  } else {
-    progressBar.classList.remove('hide');
-  }
-};
-
-document.querySelectorAll('#island').forEach(viewer => {
-  viewer.addEventListener('progress', onProgress);
-});
-// =========================================================================
+               
+                const annotation = hotspot.querySelector('.HotspotAnnotation');
+                if (annotation) {
+                    annotation.classList.toggle('visible-annotation'); 
+                }
+            });
+        });
+    }
 </script>
    
 </body>
