@@ -890,42 +890,54 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
 
 <script>
     // --- portfolio scrolling, animation, progress ---
-    let currentSlide = 1;
-    const totalSlides = 5; 
+   let currentSlide = 1;
 
-    function updateProgressBar() {
-        const progress = (currentSlide / totalSlides) * 100;
-        const progressBar = document.getElementById('progressBar');
-        if (progressBar) {
-            progressBar.style.width = progress + '%';
-        }
+function updateProgressBar(totalSlides) {
+    const progress = (currentSlide / totalSlides) * 100;
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        progressBar.style.width = progress + '%';
     }
+}
     
-    function handleScroll() {
-        const slides = document.querySelectorAll('.slide');
-        const scrollPosition = window.scrollY + window.innerHeight / 2;
+function handleScroll() {
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    if (totalSlides === 0) return;
+
+    let newCurrentSlide = currentSlide;
+    const triggerPoint = window.scrollY + window.innerHeight * 0.5;
+    
+    slides.forEach((slide, index) => {
+        const slideTop = slide.offsetTop;
+        const slideBottom = slideTop + slide.offsetHeight;
         
-        slides.forEach((slide, index) => {
-            const slideTop = slide.offsetTop;
-            const slideBottom = slideTop + slide.offsetHeight;
-            
-            if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
-                const slideNumber = index + 1;
-                if (slideNumber !== currentSlide) {
-                    currentSlide = slideNumber;
-                    updateProgressBar();
-                }
-            }
-        });
-    }
-    
-    let scrollTimeout;
-    window.addEventListener('scroll', function() {
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
+        if (triggerPoint >= slideTop && triggerPoint < slideBottom) {
+            newCurrentSlide = index + 1;
         }
-        scrollTimeout = setTimeout(handleScroll, 50);
     });
+
+    if (newCurrentSlide !== currentSlide) {
+        currentSlide = newCurrentSlide;
+        updateProgressBar(totalSlides);
+    } else if (totalSlides > 0) {
+        updateProgressBar(totalSlides);
+    }
+}
+    
+let scrollTimeout;
+window.addEventListener('scroll', function() {
+    if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+    }
+    scrollTimeout = setTimeout(handleScroll, 50);
+});
+
+
+
+
+
+	
     
     document.addEventListener('DOMContentLoaded', function() {
         updateProgressBar();
