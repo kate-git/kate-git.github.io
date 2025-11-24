@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katsiaryna Barysevich - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-csharp.min.js"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="./island/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors */
+            --primary-orange: #FF6B35;
+            --secondary-orange: #F7931E;
+            --dark-navy: #1A1A2E;
+            --deep-navy: #0F0F1A;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+            
+            /* Accent Colors */
+            --accent-green: #00D4AA;
+            --accent-green-dark: #00B89C;
+            --accent-pink: #FF6B9D;
+            --text-dark: #2C2C54;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            --gradient-dark: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 100%);
+            --gradient-green: linear-gradient(135deg, #00D4AA 0%, #00B89C 100%);
+            
+            /* Glass Morphism */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(10px);
+        }
+
+        /* Smooth Scrolling Setup */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #0F0F1A 0%, #1A1A2E 100%);
+            color: var(--white);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* Section/Slide Styling */
+        .slide {
+            display: flex;
+            min-height: 100vh;
+            padding: 40px 20px;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+     .slide-content-logo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.slide-content-logo h4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 6px;
+  min-height: 100px; 
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+
+.slide-content-logo h4:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.logo__img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+}
+
+
+@media (max-width: 768px) {
+  .slide-content-logo {
+    grid-template-columns: 1fr;
+  }
+
+  .slide-content-logo h4 {
+    min-height: 60px; 
+    padding: 0.6rem;
+  }
+
+  .logo__img {
+    max-height: 40px;
+  }
+}
+}
+
+.slide-content-logo h4 {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  padding: 1rem;
+  border-radius: 6px;
+  min-height: 100px;     
+}
+
+.logo__img {
+  max-width: 100%;
+  max-height: 60px;  
+  object-fit: contain;
+}
+
+        /* Slide Numbers */
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent-green);
+            transition: width 0.3s;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 212, 170, 0.3);
+        }
+        
+        /* Slide Separators */
+        .slide-separator {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+            opacity: 0.5;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 0.8rem;
+        }
+        h4 i, 
+            h4 img {
+              margin-right: 8px;
+              vertical-align: middle; 
+            }
+
+        .subtitle {
+            font-size: 1.6rem;
+            font-weight: 500;
+            opacity: 0.8;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Glass Morphism Cards */
+        .overview-section, .session-card, .skill-card, .assessment-item, 
+        .timeline-content, .project-card, .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+            border-left: 6px solid var(--accent-green);
+            margin: 20px 0;
+        }
+        
+        .project-card {
+          display: grid;
+          grid-template-columns: 1fr 1fr; /* текст слева, видео справа */
+          gap: 20px;
+          align-items: center;
+        }
+
+        .project-gallery {
+          width: 100%;
+          max-width: 600px; 
+          margin: auto;
+        }
+        
+        .project-gallery img {
+          width: 100%;
+           border-radius: 10px;
+        }
+        @media (max-width: 768px) {
+          .project-card {
+            grid-template-columns: 1fr; 
+          }
+        }
+        
+        .video-container {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 */
+          height: 0;
+          overflow: hidden;
+          border-radius: 10px;
+        }
+        
+        .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: 0;
+        }
+
+        /* Title Slide */
+        .title-slide {
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+        }
+
+        .course-info {
+            font-size: 1.2rem;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+       .content__social {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem 2rem;
+  justify-items: center; 
+  align-items: center;
+  margin-top: 1.5rem;
+  max-width: 400px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content__social a {
+  color: #fff;
+  font-size: 1.5rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+}
+
+.content__social a:hover {
+  color: #1da1f2;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+  .content__social {
+    grid-template-columns: 1fr;
+  }
+}
+
+        .session-info {
+            font-size: 1.4rem;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .content-two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        /* Lists */
+        ul, ol {
+            padding-left: 20px;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+     
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+
+            .content-two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Title Slide -->
+    <div class="slide title-slide" id="slide-1">
+        <div class="slide-number">1</div>
+        <div class="slide-content">
+            <div class="course-info">Portfolio</div>
+            <h1>Katsiaryna Barysevich</h1>
+            <div class="subtitle">XR Creative Developer</div>
+            <i class="fa-solid fa-location-dot"> Sweden, Stockholm</i>
+            <div class="session-info" style="margin-top: 2rem;">
+                <i class="fas fa-sharp fa-solid fa-circle-user"></i> <span class="content__description">Contact:</span>
+                    <nav class="content__social">
+                       <div> <a href="https://www.linkedin.com/in/katsiaryna-barysevich-385524101/" target="_blank" class="content__social-item">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a> </div>
+                        <div><a href="https://wa.me/46760973361" target="_blank" class="content__social-item">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>Whatsapp</span>
+                        </a></div>
+                         <div><a href="https://github.com/kate-git" target="_blank" class="content__social-item">
+                         <i class="fa-brands fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        </div>
+                        <a href="mailto:keo.90g@gmail.com">
+                        <i class="fa-brands fa-google"></i>
+                            <span>Email</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+    
+    <!-- About me -->
+    <div class="slide" id="slide-2">
+        <div class="slide-number">2</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-clipboard-check"></i> About</h2>
+            <div class="content-card">
+                <p> I am passionate about creating innovative and creative solutions that combine technology with imagination. I enjoy working with virtual technologies and exploring how they can push the boundaries of interaction between humans and the digital world.
+
+As a C# developer, I focus on both the technical side—such as game mechanics, and problem solving—and the creative side, ensuring that every project is not only functional but also inspiring. My goal is to build experiences that engage, surprise, and inspire users.
+                </p>
+            </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Intro -->
+    <div class="slide title-slide" id="slide-3">
+        <div class="slide-number">3</div>
+         <div class="slide-content">
+            <h1>Skills</h1>
+             <div class="slide-content-logo">
+             <div class="content-card">
+                    <h4><i class="fab fa-unity"></i> Unity </h4>
+             </div>
+             
+              <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" alt="Unreal Engine Logo" src="https://cms-assets.unrealengine.com/AVzjeqAbLRKi3W5jq0CAvz/cmb81xhrx3tsh07mzz3amnbyl" width="233"></h4>
+             </div>
+                 
+             <div class="content-card">
+                    <h4><i class="fa-brands fa-github"></i> GitHub </h4>
+             </div>
+                 
+             <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" alt="Blender" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Blender_logo_no_text.svg/1024px-Blender_logo_no_text.svg.png?20210507122249" width="233">Blender</h4>
+             </div>
+                 
+                  
+           <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" src="https://brandlogos.net/wp-content/uploads/2022/07/autodesk_maya-logo_brandlogos.net_x7aqy.png">Maya</h4>
+             </div>
+             
+             <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52">C#</h4>
+             </div>
+             
+             <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/adobe-substance-3d-painter-icon.png">Substance 3D Painter</h4>
+             </div>
+             
+             
+             <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" src="https://www.svgrepo.com/show/508998/zbrush.svg">ZBrush for iPad</h4>
+             </div>
+             
+             <div class="content-card">
+                    <h4><img class="logo__img" fetchpriority="high" height="52" src="https://upload.wikimedia.org/wikipedia/commons/1/15/Houdini3D_icon.png">Houdini</h4>
+             </div>
+                 </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Projects -->
+    <div class="slide" id="slide-4">
+        <div class="slide-number">4</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-trophy"></i> Projects</h2>
+            
+            <div class="content-card project-card">
+                <div class="project-text">
+                <h4><i class="fa-solid fa-dungeon"></i> The "Escape The Grey" Puzzle Box</h4>
+                <p>Routine corporate environments often lack creativity and inspiration, leading to feelings of disempowerment. "Escape the Grey" is a single-player experience where the player must complete a series of interactive tasks to escape a dull corporate office and reach the freedom of nature.</p>
+               <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, C#, GitHub, Blender, Maya
+          </p></div>
+                <div class="project-video">
+                            <div class="video-container">
+                              <iframe 
+                                src="https://www.youtube.com/embed/jE2L2_N8C1E" 
+                                title="Escape the Grey"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                       </div>
+            </div>
+            
+            <div class="content-card project-card">
+                 <div class="project-text">
+                <h4><i class="fa-solid fa-dove"></i> The "Happy and Flappy" game</h4>
+                <p>Imagine being a bird finally breaking free from its cage. Your goal is to flap your wings and navigate through a series of challenging obstacles, earning points based on how many coins you collect. The farther you go, the higher your score, 
+                    testing both your skill and determination in a thrilling flight to freedom while also getting your arm workout.</p>
+                  <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, C#, GitHub, Maya
+          </p></div>
+                       <div class="project-video">
+                            <div class="video-container">
+                              <iframe 
+                                src="https://www.youtube.com/embed/iIgVavyJqok" 
+                                title="Happy and Flappy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                       </div>
+            </div>
+            
+            <div class="content-card project-card">
+                <div class="project-text">
+                 <h4><i class="fa-solid fa-cloud"></i> Airship relaxing space</h4>
+                  <p>This project was created as a place for relaxation — what could be better than a quiet summer evening with the gentle sound of crickets and a soft breeze? It offers a calming, immersive environment designed to help the player slow down, unwind, and enjoy a peaceful moment away from everyday stress.</p>
+                   <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, Substance Painter, C#, GitHub, Maya, Procreate
+                       </p></div>
+                            <div class="project-video">
+                                        <div class="video-container">
+                                          <iframe 
+                                            src="https://www.youtube.com/embed/g95kkeeWJiI" 
+                                            title="Airship"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                            allowfullscreen>
+                                          </iframe>
+                                        </div>
+                                   </div>
+                        </div>
+
+               <div class="content-card project-card">
+                    <div class="project-text">
+                        <h4><i class="fa-solid fa-house"></i>Future Property in VR</h4>
+                        <p>Future Property in VR is an interactive property showcase that lets clients explore future real estate projects in a fully immersive environment. It transforms presentations into engaging experiences, helping clients better understand design, scale, and atmosphere.</p>
+                             <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unreal, C#, GitHub, Maya, Substance Painter
+                             </p></div>
+                           <div class="project-video">
+                            <div class="video-container">
+                              <iframe 
+                                src="https://www.youtube.com/embed/SyEjRzd9how" 
+                                title="Future Property"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                       </div>
+            </div>
+
+             <div class="content-card project-card">
+               <div class="project-text">
+                <h4><i class="fa-solid fa-person-dress"></i>Sleeping beauty in AR</h4>
+                <p>Concept: Reinterpret museum objects as part of a “cabinet of curiosities” where each artifact tells a unique story enhanced by dance and movement.
+                Participants experience a digital exhibition where objects come to life through choreographed motion, interactive installations, and spatial storytelling that invite them to explore the narrative through movement.
+ </p>
+                   <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, C#, GitHub, Blender
+           </p></div>
+                   <div class="project-video">
+                            <div class="video-container">
+                              <iframe 
+                                src="https://www.youtube.com/embed/8rQuWoN4h4o" 
+                                title="Sleeping beauty"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                              </iframe>
+                            </div>
+                       </div>
+           </div>
+            
+            <div class="content-card project-card"> 
+                 <div class="project-text">
+                 <h4><i class="fa-solid fa-tree"></i>Shanti</h4>
+                <p>The Yoga Resort space in VR was designed as an alternative form of relaxation, offering a mindful break from everyday work. Here, users can ground themselves and find calmness while surrounded by a soothing, contemplative environment. They can listen to the crackling of burning candles, join a yoga session, or immerse themselves in meditation accompanied by the tranquil sounds of a singing bowl.</p>
+                  <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, C#, GitHub, Maya
+           </p></div>
+                    <div class="project-video">
+                        <div class="video-container">
+                          <iframe 
+                            src="https://www.youtube.com/embed/KvGVDtZ93GQ" 
+                            title="Yoga resort"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                          </iframe>
+                        </div>
+                    </div>
+            </div>
+
+            
+             <div class="content-card project-card"> 
+                 <div class="project-text">
+                 <h4><i class="fa-solid fa-wand-sparkles"></i>Spells Wizard VR</h4>
+                <p>Imagine yourself as a wizard, tasked with defending the world against sinister creatures trying to break into our realm. Harness the power of spellcasting through drawing, unleash a variety of magical effects, and stand as the last line of defense to save the world from its enemies.</p>
+                  <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Unity, C#, GitHub, Maya
+           </p></div>
+                    <div class="project-video">
+                        <div class="video-container">
+                          <iframe src="https://www.youtube.com/embed/asqMCVBpJgM" 
+                            title="Spells Wizard VR"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                          </iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card project-card">
+                  <h3>3D Island Scene (Interactive)</h3>
+                
+                  <model-viewer src="./island/island11.glb"
+                    camera-controls
+                    ar
+                    ar-modes="scene-viewer webxr quick-look"
+                    interpolation-decay="200"
+                    shadow-intensity="0.5"
+                    exposure="1.1"
+                    shadow-softness="1"
+                    style="width:100%; height:400px; border-radius:12px;">
+                  </model-viewer>
+                
+                </div>
+
+ <div class="content-card project-card"> 
+                 <div class="project-text">
+                 <h4><i class="fa-solid fa-broom"></i>Witch's House</h4>
+                <p>3D modelling project. This 3D witch’s house was inspired by the Halloween season and the warm, mysterious atmosphere of autumn. Every detail—from the hand-crafted materials to the glowing candles and interior lighting—was created entirely in Maya, with a focus on capturing both mood and storytelling.</p>
+                  <br>
+                <p><strong class="fa-solid fa-wrench"> Tools: </strong>
+                    <br>Maya
+           </p></div>
+                    <div class="project-gallery">
+              <div class="swiper witch-swiper">
+                <div class="swiper-wrapper">
+                
+                  <div class="swiper-slide"><img src="1.jpg" alt="Witch house 1"></div>
+                  <div class="swiper-slide"><img src="11.jpg" alt="Witch house 2"></div>
+                  <div class="swiper-slide"><img src="20.jpg" alt="Witch house 3"></div>
+                  <div class="swiper-slide"><img src="21.jpg" alt="Witch house 4"></div>
+                  <div class="swiper-slide"><img src="22.jpg" alt="Witch house 5"></div>
+                  <div class="swiper-slide"><img src="26grey.jpg" alt="Witch house 6"></div>
+                </div>
+ 
+    <div class="swiper-pagination witch-pagination"></div>
+    <div class="swiper-button-next witch-next"></div>
+    <div class="swiper-button-prev witch-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+ </div>
+ </div>            
+ 
+ <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  const witchSwiper = new Swiper('.witch-swiper', {
+    loop: true,
+    pagination: {
+      el: '.witch-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.witch-next',
+      prevEl: '.witch-prev',
+    },
+  });
+</script>
+
+<style>
+.project-gallery {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  overflow: hidden; 
+}
+
+.witch-swiper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+  z-index: 20;
+  pointer-events: auto;
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
+}
+
+.swiper-pagination-bullet {
+  background: var(--accent-green);
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--accent-green-dark);
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project-gallery {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    transform: scale(0.8);
+  }
+
+  .swiper-slide img {
+    border-radius: 8px;
+  }
+}
+</style>
+
+
+
+             <div class="content-card project-card"> 
+                 <div class="project-text">
+                 <h4><i class="fa-solid fa-wand-sparkles"></i>3D model for "Sleeping beauty" project</h4>
+                <p>This dress was created for the “Sleeping Beauty” project and is a faithful 3D recreation of a piece from the Dance Museum collection.</p>
+                  <br>
+                </div>
+                    <div class="project-video">
+
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+
+<model-viewer 
+  src="model.glb" 
+  alt="3D ballet dress"
+  auto-rotate 
+  camera-controls 
+  poster="preview.jpg"
+  shadow-intensity="1"
+  exposure="1"
+  style="width: 100%; height: 500px; border-radius: 10px;">
+</model-viewer>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        <div class="slide-separator"></div>
+    </div>
+
+
+    
+    <div class="slide" id="slide-5">
+        <div class="slide-number">5</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-tasks"></i> Education</h2>
+            <div class="content-two-col">
+                 <div class="content-card">
+                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Belarusian State University of Informatics and Radioelectronics</h4>
+                    <p>Telecommunication Engineer (2008-2013)</p>
+                    <p>Minsk, Belarus</p>
+                </div>
+                 <div class="content-card">
+                    <h4><i class="fa-sharp fa-solid fa-user-graduate"></i> Hyper Island, Stockholm, Sweden</h4>
+                    <p>XR Creative Developer(2024-2026)</p>
+                </div>
+                 
+            </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+
+    <!-- PWD Delivery -->
+    <div class="slide" id="slide-6">
+        <div class="slide-number">6</div>
+        <div class="slide-content">
+            <h2><i class="fas fa-video"></i> Courses</h2>
+            <div class="content-card">
+                    <p>- Basics of software testing (2014),  Itransition Group Ltd.</p>
+                    <p>- SQL from scratch (2015),  Itransition Group Ltd.</p>
+                    <p>- Mobile testing basics, iOS testing tools, Android testing tools workshop (2015),  Itransition Group Ltd.</p>
+                    <p>- Web-services testing (2016),  Itransition Group Ltd.</p>
+                    <p>- Linux Essentials course (2016),  Itransition Group Ltd.</p>
+                    <p>- Performance optimization training (2018), EPAM Systems</p>
+                </div>
+        </div>
+        <div class="slide-separator"></div>
+    </div>
+    
+    <script>
+     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+        <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function updateProgressBar() {
+            const progress = (currentSlide / totalSlides) * 100;
+            const progressBar = document.getElementById('progressBar');
+            if (progressBar) {
+                progressBar.style.width = progress + '%';
+            }
+        }
+        
+        function handleScroll() {
+            const slides = document.querySelectorAll('.slide');
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+            
+            slides.forEach((slide, index) => {
+                const slideTop = slide.offsetTop;
+                const slideBottom = slideTop + slide.offsetHeight;
+                
+                if (scrollPosition >= slideTop && scrollPosition < slideBottom) {
+                    const slideNumber = index + 1;
+                    if (slideNumber !== currentSlide) {
+                        currentSlide = slideNumber;
+                        updateProgressBar();
+                    }
+                }
+            });
+        }
+        
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(handleScroll, 50);
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProgressBar();
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { 
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            document.querySelectorAll('.content-card').forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        
+            setTimeout(handleScroll, 100);
+   
+            
+
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+});
+</script>
+    <script src="./island/script.js"></script>
+</body>
