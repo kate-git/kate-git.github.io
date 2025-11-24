@@ -356,7 +356,62 @@
             margin-left: auto;
             margin-right: auto;
         }
+.HotspotAnnotation {
+    background: var(--dark-navy);
+    color: var(--white);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    position: absolute;
+    bottom: calc(100% + 10px); /* Положение над кнопкой */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none; /* Не блокирует клики */
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
 
+.visible-annotation {
+    opacity: 1;
+}
+
+
+#ar-button {
+    background: var(--accent-green);
+    color: var(--deep-navy);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* Model Progress Bar */
+.model-progress-bar {
+    display: none; 
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    height: 6px;
+    width: 90%;
+    position: absolute;
+    bottom: 50%;
+    left: 5%;
+}
+
+.model-update-bar {
+    background-color: var(--primary-pink); 
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+		
 
         /* Lists */
         ul, ol {
