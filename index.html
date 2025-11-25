@@ -890,10 +890,14 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
 
 <script>
     // --- portfolio scrolling, animation, progress ---
-   let currentSlide = 1;
+let currentSlide = 1;
 
 function updateProgressBar(totalSlides) {
-    const progress = (currentSlide / totalSlides) * 100;
+    const denominator = totalSlides > 1 ? (totalSlides - 1) : 1;
+    const numerator = totalSlides > 1 ? (currentSlide - 1) : 0;
+    
+    const progress = (numerator / denominator) * 100;
+    
     const progressBar = document.getElementById('progressBar');
     if (progressBar) {
         progressBar.style.width = progress + '%';
@@ -920,10 +924,11 @@ function handleScroll() {
     if (newCurrentSlide !== currentSlide) {
         currentSlide = newCurrentSlide;
         updateProgressBar(totalSlides);
-    } else if (totalSlides > 0) {
-        updateProgressBar(totalSlides);
     }
 }
+
+
+	
     
 let scrollTimeout;
 window.addEventListener('scroll', function() {
