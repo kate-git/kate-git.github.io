@@ -940,8 +940,7 @@ window.addEventListener('scroll', function() {
 	
     
     document.addEventListener('DOMContentLoaded', function() {
-        updateProgressBar();
-        
+    handleScroll();
       
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -962,7 +961,6 @@ window.addEventListener('scroll', function() {
             observer.observe(el);
         });
     
-        setTimeout(handleScroll, 100);
 
         // Swiper
         const swiper = new Swiper('.swiper', {
