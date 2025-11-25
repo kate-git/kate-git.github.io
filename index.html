@@ -154,17 +154,45 @@
         }
 
         /* Progress Bar */
-        .progress-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            background: var(--accent-green);
-            transition: width 0.3s;
-            z-index: 1000;
-            box-shadow: 0 0 10px rgba(0, 212, 170, 0.3);
-        }
-        
+			#progressBar { 
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    height: 4px;
+			    background: var(--accent-green); 
+			    transition: width 0.3s;
+			    z-index: 1000;
+			    box-shadow: 0 0 10px rgba(0, 212, 170, 0.3);
+			}
+			
+			
+			.model-progress-bar {
+			    
+			    display: block;
+			    width: 100%;
+			    height: 5px;
+			    background: rgba(0, 0, 0, 0.5);
+			    position: absolute;
+			    bottom: 0;
+			    left: 0;
+			    z-index: 999;
+			}
+			
+			.model-update-bar {
+			    background-color: var(--primary-pink);
+			    width: 0%;
+			    height: 100%;
+			    float: left;
+			    transition: width 0.3s;
+			}
+			
+			.model-progress-bar.hide {
+			    visibility: hidden;
+			    transition: visibility 0.3s;
+			}
+
+
+		
         /* Slide Separators */
         .slide-separator {
             position: absolute;
