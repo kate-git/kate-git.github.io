@@ -878,7 +878,7 @@ As a C# developer, I focus on both the technical side—such as game mechanics, 
 
 <script>
     // --- portfolio scrolling, animation, progress ---
-let currentSlide = 1;
+	let currentSlide = 1;
 
 function updateProgressBar(totalSlides) {
     const denominator = totalSlides > 1 ? (totalSlides - 1) : 1;
@@ -909,103 +909,93 @@ function handleScroll() {
         }
     });
 
-    if (newCurrentSlide !== currentSlide) {
+    if (newCurrentSlide !== currentSlide || !document.getElementById('progressBar').style.width) {
         currentSlide = newCurrentSlide;
         updateProgressBar(totalSlides);
     }
 }
-
-
-	
     
 let scrollTimeout;
-window.addEventListener('scroll', function() {
-    if (scrollTimeout) {
-        clearTimeout(scrollTimeout);
-    }
+window.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(handleScroll, 50);
 });
 
 
-
-
-
-	
+document.addEventListener('DOMContentLoaded', () => {
     
-    document.addEventListener('DOMContentLoaded', function() {
     handleScroll();
-      
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { 
-            threshold: 0.2,
-            rootMargin: '0px 0px -50px 0px'
-        });
 
-        document.querySelectorAll('.content-card').forEach((el) => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
         });
-    
-
-        // Swiper
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-        
-        // Swiper for withc's house
-        const witchSwiper = new Swiper('.witch-swiper', {
-            loop: true,
-            pagination: {
-                el: '.witch-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.witch-next',
-                prevEl: '.witch-prev',
-            },
-        });
+    }, { 
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
     });
 
-    // --- logic for <model-viewer> Progress Bar---
-    const onProgress = (event) => {
-        
-        const progressBar = event.target.querySelector('.model-progress-bar');
-        const updatingBar = event.target.querySelector('.model-update-bar');
-        
-        if (!progressBar || !updatingBar) return;
-        
-        updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
-
-        if (event.detail.totalProgress === 1) {
-            progressBar.style.display = 'none';
-            event.target.removeEventListener('progress', onProgress);
-        } else {
-            progressBar.style.display = 'block';
-        }
-    };
+    document.querySelectorAll('.content-card').forEach((el) => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        observer.observe(el);
+    });
     
-    document.querySelector('#island')?.addEventListener('progress', onProgress);
+
+    const mainSwiper = new Swiper('.swiper', {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+    
+    
+    const witchSwiper = new Swiper('.witch-swiper', {
+        loop: true,
+        pagination: {
+            el: '.witch-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.witch-next',
+            prevEl: '.witch-prev',
+        },
+    });
+});
+
+
+const onProgress = (event) => {
+    const progressBar = event.target.querySelector('.model-progress-bar');
+    const updatingBar = event.target.querySelector('.model-update-bar');
+    
+    if (!progressBar || !updatingBar) return;
+    
+    updatingBar.style.width = `${event.detail.totalProgress * 100}%`;
+
+    if (event.detail.totalProgress === 1) {
+        progressBar.style.display = 'none';
+        event.target.removeEventListener('progress', onProgress);
+    } else {
+        progressBar.style.display = 'block';
+    }
+};
+
+document.querySelector('#island')?.addEventListener('progress', onProgress);
 </script>
 
 
+	
+
 <script type="module">
-    
     const viewer = document.querySelector("#island");
 
     if (viewer) {
